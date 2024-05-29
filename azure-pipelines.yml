@@ -1,0 +1,134 @@
+# Maven
+
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+  variables:
+    - group: uao
+    - name: imageName
+      value: "uao"
+    - name: azureSuscription
+      value: "test"
+    - name: azureRegistry
+      value: "testuao.azurecr.io"
+
+# Config Service
+- job: Build_Config_Service
+  displayName: 'Build Config Service'
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'config-service/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'clean install'
+        sonarQubeRunAnalysis: false
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'config_art'
+        publishLocation: 'pipeline'
+
+# Eureka Service
+- job: Build_Eureka_Service
+  displayName: 'Build Eureka Service'
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'eureka-service/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'clean install'
+        sonarQubeRunAnalysis: false
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'eureka_art'
+        publishLocation: 'pipeline'
+
+# Gateway Service
+- job: Build_Gateway_Service
+  displayName: 'Build Gateway Service'
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'gateway-service/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'clean install'
+        sonarQubeRunAnalysis: false
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'gateway_art'
+        publishLocation: 'pipeline'
+
+# Insurance Policies Service
+- job: Build_Insurance_Policies_Service
+  displayName: 'Build Insurance Policies Service'
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'insurance-policies-service/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'clean install'
+        sonarQubeRunAnalysis: false
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'insurance_policies_art'
+        publishLocation: 'pipeline'
+
+# Current TRM Service
+- job: Build_Current_TRM_Service
+  displayName: 'Build Current TRM Service'
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'currentTRM-service/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'clean install'
+        sonarQubeRunAnalysis: false
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'current_trm_art'
+        publishLocation: 'pipeline'
+
+# Microservice Insurance
+- job: Build_Microservice_Insurance
+  displayName: 'Build Microservice Insurance'
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'microservice-insurance/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'clean install'
+        sonarQubeRunAnalysis: false
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'microservice_insurance_art'
+        publishLocation: 'pipeline'

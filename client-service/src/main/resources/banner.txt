@@ -1,0 +1,6 @@
+ ,-----.
+'  .--./
+|  |
+'  '--'\
+ `-----'
+ El servicio de CLIENTE se está inicializando.

@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  microservice-insurance:
+    container_name: microservice-insurance
+    image: microservice-insurance
+    build:
+      context: .
+      dockerfile: .dockerfile
+    ports:
+      - "8060:8060"
+    environment:
+      - SPRING_APPLICATION_NAME=msvc-insurance
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://testuao.postgres.database.azure.com:5432/postgres?user=jacfdev&password={test123*}&sslmode=require
+      - SPRING_DATASOURCE_USERNAME=jacfdev
+      - SPRING_DATASOURCE_PASSWORD=test123*
+      - SPRING_JPA_HIBERNATE_DDLAUTO=update
+      - SPRING_JPA_DATABASE=postgresql
+      - SPRING_JPA_DATABASEPLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:8888
+      - EUREKA_INSTANCE_HOSTNAME=host.docker.internal
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka/

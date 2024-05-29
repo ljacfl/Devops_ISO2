@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  transaction-history-service:
+    container_name: transaction-history-service
+    image: transaction-history-service
+    build: 
+      context: .
+      dockerfile: .dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_APPLICATION_NAME=msvc-transaction-history
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://juanmiguelleon43:root@clusteraseguradora.5e5guw9.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAseguradora
+      - SPRING_DATA_MONGODB_DATABASE=CourseDB
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:8888
+      - EUREKA_INSTANCE_HOSTNAME=host.docker.internal
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka/

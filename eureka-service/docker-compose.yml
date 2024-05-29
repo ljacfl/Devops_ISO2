@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  eureka-service:
+    container_name: eureka-service
+    image: eureka-service
+    build: 
+      context: .
+      dockerfile: .dockerfile
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_APPLICATION_NAME=msvc-eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:8888
+      - EUREKA_INSTANCE_HOSTNAME=host.docker.internal
+      - EUREKA_CLIENT_REGISTERWITHEUREKA=false
+      - EUREKA_CLIENT_FETCHREGISTRY=false
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka/

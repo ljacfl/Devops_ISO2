@@ -1,0 +1,19 @@
+server:
+  port: 9030
+
+spring:
+  application:
+    name: msvc-payment
+  data:
+    mongodb:
+      uri: mongodb+srv://cristiandominguez:3noEs6IUgXZ1w9T3@cluster0.lca0sjp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: Insurance
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

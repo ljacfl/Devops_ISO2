@@ -1,0 +1,7 @@
+,------.
+|  .---'
+|  `--,
+|  `---.
+`------'
+
+El servicio de EUREKA se está inicializando.

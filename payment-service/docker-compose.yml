@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  payment-service:
+    container_name: payment-service
+    image: payment-service
+    build: 
+      context: .
+      dockerfile: .dockerfile
+    ports:
+      - "9030:9030"
+    environment:
+      - SPRING_APPLICATION_NAME=msvc-payment
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://cristiandominguez:3noEs6IUgXZ1w9T3@cluster0.lca0sjp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - SPRING_DATA_MONGODB_DATABASE=Insurance
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:8888
+      - EUREKA_INSTANCE_HOSTNAME=host.docker.internal
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://host.docker.internal:8761/eureka/

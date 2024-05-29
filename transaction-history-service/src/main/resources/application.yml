@@ -1,0 +1,21 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: msvc-transaction-history
+
+  data:
+    mongodb:
+      uri: mongodb+srv://juanmiguelleon43:root@clusteraseguradora.5e5guw9.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAseguradora
+      database: CourseDB
+
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

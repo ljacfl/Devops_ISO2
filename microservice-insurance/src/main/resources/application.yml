@@ -1,0 +1,25 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: msvc-insurance
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://testuao.postgres.database.azure.com:5432/postgres?user=jacfdev&password=test123*&sslmode=require
+    username: jacfdev
+    password: test123*
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
